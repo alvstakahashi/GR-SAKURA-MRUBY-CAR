@@ -1,0 +1,8 @@
+"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\crt0.s"
+--mlittle-endian-data
+--m32bit-doubles
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\include"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp"
+--gdwarf2
+-o "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\SimDebug_RX600\crt0.o"

@@ -1,0 +1,19 @@
+-c -x assembler-with-cpp
+-mcpu=rx600
+-mlittle-endian-data
+-mint-register=0
+-I "c:\program files (x86)\renesas\swest1\tools\kpit\gnurx-elf\v12.01\rx-elf\rx-elf\include"
+-I "c:\program files (x86)\renesas\swest1\tools\kpit\gnurx-elf\v12.01\rx-elf\lib\gcc\rx-elf\4.6-GNURX_v12.01\include"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_build"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_common"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_common\include"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_common\include\rxduino"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_common\lib"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_mruby\include"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\include"
+-I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp"
+-D DEBUG
+"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\prc_support.asm"
+-g
+-g2
+-o "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\SimDebug_RX600\prc_support.o"
