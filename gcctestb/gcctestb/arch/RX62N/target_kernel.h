@@ -42,7 +42,7 @@
  */
 
 /*
- *  カーネルのターゲット依存定義（FRK-RX62N用）
+ *  カーネルのターゲット依存定義（FRK-RX62N用）(GR-SAKURA GCC用)
  */
 
 /*
@@ -59,6 +59,7 @@
 
 
 #if defined __GNUC__
+#define Inline	static __inline__	/* インライン関数 */
 #endif
 
 /*
@@ -84,6 +85,28 @@
 #define	TIC_NUME		( 1U )		/* タイムティックの周期の分子 */
 #define	TIC_DENO		( 1U )		/* タイムティックの周期の分母 */
 
+
+#if defined __GNUC__
+Inline void ipl_maskClear( void )
+{
+	__asm__("push	r1");
+	__asm__("mvfc	psw,r1");
+	__asm__("and	#0xf0ffffff,r1");
+	__asm__("mvtc	r1,psw");
+	__asm__("pop	r1");
+}
+#else
+#pragma inline_asm	ipl_maskClear
+static void 
+ipl_maskClear(void)
+{
+	push	r1
+	mvfc	psw,r1
+	and		#0xf0ffffff,r1
+	mvtc	r1,psw
+	pop		r1
+}
+#endif
 
 
 
@@ -120,6 +143,9 @@ enaint( void )
 	setpsw	i
 }
 #endif
+
+
+
 /*
  *  CPUロック状態への移行
  *
@@ -193,14 +219,33 @@ static
 void idle_loop(void)
 {
 	t_unlock_cpu();
+	ipl_maskClear();
 	t_lock_cpu();
 }
 
+#if defined __GNUC__
+static inline
+#else
+#pragma inline  (goto_taskMode)
+static 
+#endif
+void goto_taskMode( void ) 
+{	
+	ipl_maskClear();
+	t_unlock_cpu();
+}
 
 /*
  *  プロセッサステータスレジスタ(PSW)の現在値の読出し
  */
 #if defined __GNUC__
+Inline int current_psw(void)
+{
+	int status;
+	__asm__("mvfc	psw,%[Rd]":[Rd]"=r"(status));
+	return(status);
+}
+
 #else
 #pragma inline_asm	current_psw
 static uint32_t
@@ -245,8 +290,16 @@ bool_t sense_context( void )
 	/*  ネストカウンタ0より大なら非タスクコンテキスト  */
 	return ( intnest > 0U );
 }
-
-
+#if defined __GNUC__
+#define	set_task_stack(x)	__asm__( "MVTC %[Rs1],isp"::[Rs1]"r"(x))
+#else
+#pragma inline_asm	set_task_stack
+static void
+set_task_stack( intptr_t stkp )
+{
+	MVTC	R1,isp
+}
+#endif
 
 #endif /* TOPPERS_TARGET_KERNEL_H */
 #endif

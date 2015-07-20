@@ -93,7 +93,7 @@ act_tsk(ID tskid)
 	t_lock_cpu();
 	if (test_dormant(tskpri)) {
 		if(make_active(tskpri)) {
-			run_task(tskpri);
+			dispatch(tskpri);
 		}
 		ercd = E_OK;
 	}
@@ -142,5 +142,7 @@ iact_tsk(ID tskid)
 	LOG_IACT_TSK_LEAVE(ercd);
 	return(ercd);
 }
+
+
 
 #endif /* TOPPERS_iact_tsk */

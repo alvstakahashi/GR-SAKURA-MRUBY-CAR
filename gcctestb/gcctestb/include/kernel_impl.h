@@ -56,7 +56,7 @@
  *  カーネルの内部識別名のリネーム
  */
 #include "kernel_rename.h"
-#define intnest						_kernel_intnest
+//#define intnest						_kernel_intnest
 
 /*
  *  カーネル動作状態フラグ（startup.c）
@@ -65,7 +65,7 @@
 
 extern bool_t	kerflg;
 
-extern uint16_t intnest;
+extern volatile uint16_t intnest;
 /*
  *  アプリケーションと共通のヘッダファイル
  */

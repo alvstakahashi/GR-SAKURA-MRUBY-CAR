@@ -1,0 +1,8 @@
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s"
+--mlittle-endian-data
+--m32bit-doubles
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\include"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp"
+--gdwarf2
+-o "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\Config1\crt0.o"

@@ -72,7 +72,7 @@ _PowerON_Reset :
 	mov	#_bss, r1 	/* store the start address of bss in R1 */
 	sub   r1,r3	   	/* size of bss section in R3 (R3=R3-R1) */
 	sstr.b
-#ifndef GDB_SIMULATOR_DEBUG
+#if !defined GDB_SIMULATOR_DEBUG
 /* call the hardware initialiser */
 	bsr.a	_HardwareSetup	
 	nop

@@ -1,11 +1,10 @@
--T "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\SimDebug_RX600\gcctestb_SimDebug_RX600_auto.gsi"
--T "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\SimDebug_RX600\gcctestb_input.tmp" 
+-T "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\SimDebug_RX600\gcctestb_SimDebug_RX600_auto.gsi"
+-T "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\SimDebug_RX600\gcctestb_input.tmp" 
 -L "c:\program files (x86)\renesas\swest1\tools\kpit\gnurx-elf\v12.01\rx-elf\lib\gcc\rx-elf\4.6-GNURX_v12.01"
--L "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\SimDebug_RX600"
--L "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_common\lib"
--L "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_mruby"
--L "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_mruby\mruby-1.1.0\build\grsakura\lib"
--Map "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\SimDebug_RX600\gcctestb.map"
+-L "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\SimDebug_RX600"
+-L "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gr_common\lib"
+-L "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gr_mruby\mruby-1.1.0\build\grsakura\lib"
+-Map "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\SimDebug_RX600\gcctestb.map"
 --start-group -l "mruby" -l "supc++" -l "stdc++" -l "sim" -l "m" -l "g" -l "c" -l "gcc" -l "gcctestb" --end-group
--o "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\SimDebug_RX600\gcctestb.x"
+-o "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\SimDebug_RX600\gcctestb.x"
 -e _PowerON_Reset

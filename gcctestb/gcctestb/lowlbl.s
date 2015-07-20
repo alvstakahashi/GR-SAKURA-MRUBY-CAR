@@ -72,12 +72,12 @@ _charget:
         MOVU.B      [R2],R1
         RTS
 
-		.glb	_open:
-		.glb	_read:
-		.glb	_lseek:
-		.glb	_isatty:
-		.glb	_fstat:
-		.glb	_close:
+		.glb	_open
+		.glb	_read
+		.glb	_lseek
+		.glb	_isatty
+		.glb	_fstat
+		.glb	_close
 
 _open:
 _read:

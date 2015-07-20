@@ -52,9 +52,6 @@
 #ifndef TOPPERS_QUEUE_H
 #define TOPPERS_QUEUE_H
 
-#if defined __GNUC__
-#define Inline static inline
-#endif
 
 
 /* キューのインデックス */

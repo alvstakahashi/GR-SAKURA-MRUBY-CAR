@@ -53,6 +53,10 @@ mrb_ssp_thread_act(mrb_state *mrb, mrb_value self)
 	mrb_value id   = mrb_iv_get(mrb, self, mrb_intern_lit(mrb, "@task_id"));
 	mrb_int id_num = mrb_fixnum(id);
 
+#if 1 
+	printf("mrb_ssp_thread_act id = %d\n",id_num);
+#endif
+
 	retval = act_tsk(id_num);
 
 	if (retval == E_OK)

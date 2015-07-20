@@ -150,6 +150,11 @@ extern ER		stp_alm(ID almid);
  */
 extern ER		get_tim(SYSTIM *p_systim);
 
+extern ER 		dly_tsk(RELTIM dlytim);
+
+
+extern ER 		wai_tsk(void);
+
 #endif /* TOPPERS_MACRO_ONLY */
 
 /*

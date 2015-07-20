@@ -4,16 +4,17 @@
 -mint-register=0
 -I "c:\program files (x86)\renesas\swest1\tools\kpit\gnurx-elf\v12.01\rx-elf\rx-elf\include"
 -I "c:\program files (x86)\renesas\swest1\tools\kpit\gnurx-elf\v12.01\rx-elf\lib\gcc\rx-elf\4.6-GNURX_v12.01\include"
--I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_build"
--I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_common"
--I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_common\include"
--I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_common\include\rxduino"
--I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_common\lib"
--I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gr_mruby\include"
--I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\include"
--I "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gr_build"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gr_common"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gr_common\include"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gr_common\include\rxduino"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gr_common\lib"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gr_mruby\include"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\include"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp"
+-I "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\\arch\RX62N"
 -D DEBUG
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\task.c"
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\task.c"
 -g
 -g2
--o "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\SimDebug_RX600\task.o"
+-o "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\SimDebug_RX600\task.o"

@@ -13,6 +13,7 @@ extern mrb_value cyclic_self_tbl[];
 
 extern mrb_state *mrb_global;
 
+//#define MRB_DEBUG1 1
 
 static mrb_value
 mrb_ssp_cyclic_initialize(mrb_state *mrb, mrb_value self)
@@ -51,6 +52,11 @@ mrb_ssp_cyclic_sta(mrb_state *mrb, mrb_value self)
 	mrb_value id   = mrb_iv_get(mrb, self, mrb_intern_lit(mrb, "@cyclic_id"));
 	mrb_int id_num = mrb_fixnum(id);
 
+#if MRB_DEBUG1
+  	  printf("mrb_ssp_cyclic_sta &self = %08x self = %08x %08x\n",
+  	  		  (int)&self,*((int*)&self),*(((int*)&self)+1));
+      printf("mrb_ssp_cyclic_sta id_num = %d\n",id_num);
+#endif
 	retval = sta_cyc(id_num);
 	
 	if (retval == E_OK)

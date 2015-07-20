@@ -3,12 +3,12 @@
 [DATABASE_VERSION]
 "11.0" 
 [WORKSPACE_DETAILS]
-"gcctestb" "D:\usr\GR-SAKURA\mruby\gcctestb" "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb.hws" "RX" "KPIT GNURX [ELF]" 
+"gcctestb" "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb" "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb.hws" "RX" "KPIT GNURX [ELF]" 
 [SHARED_WORKSPACE_CONTROL_STATUS]
 "" "" "" 
 "" "" "" 
 [PROJECTS]
-"gcctestb" "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb" "D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gcctestb.hwp" 0 
+"gcctestb" "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb" "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gcctestb.hwp" 0 
 [INFORMATION]
 "ワークスペース情報がありません" 
 [SCRAP]
@@ -21,7 +21,7 @@
 [MAKEFILE_BUILD_INFO]
 "$(WORKSPDIR)\make\$(PROJECTNAME)_$(CONFIGNAME).mak" "" "$(WORKSPDIR)\make" 0 0 0 
 [VD_CONFIGURATION_OPTIONS]
-"ACTIVE_DESKTOP" "0" 
+"ACTIVE_DESKTOP" "1" 
 [VD_CONFIGURATIONS]
 "0" "Default1" "1" 
 "1" "Default2" "1" 

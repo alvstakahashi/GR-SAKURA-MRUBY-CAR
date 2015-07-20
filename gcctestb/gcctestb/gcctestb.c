@@ -52,12 +52,15 @@ int main(void)
     // TODO: add application code here
 
 	printf("hello\n");
+	
+//	dly_tsk(1000);
 
 	PORT2.PDR.BIT.B5 = 0;		//IN
 //	PORT2.PCR.BIT.B5 = 1;		//PULLUP
 
 	uint8_t *prg_data = (uint8_t *)rb_main;
 	
+#if !defined HEWSIM
 	if (PORT2.PIDR.BIT.B5 != 0)		//IO5をGND結線でスキップ
 	{
 		prg_data = mrb_read_ui();
@@ -66,7 +69,11 @@ int main(void)
 			prg_data = (uint8_t *)rb_main;
 		}
 	}
+#endif
 	mruby_call((const uint8_t *)prg_data);
+	
+	printf("mruby_call End\n");
+	
 //	act_tsk(RUBY_TSK5);
 
 //	PORTA.PODR.BIT.B0 = 1; 				// Output
@@ -88,8 +95,13 @@ void task2(intptr_t arg)
 
 void CMI0()
 {
+	static int count=0;
 	_kernel_signal_time();
-//	iact_tsk(TASK2_ID);
+	if (++count > 100)		// 10usなので、間引く
+	{
+		count = 0;
+		isig_tim();
+	}
 }
 
 //// ssp_thread で登録されるtask本体

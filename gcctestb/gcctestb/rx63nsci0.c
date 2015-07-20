@@ -191,7 +191,11 @@ int write(int fd, void *buf, int count)
 	char *p = (char*)buf;
 	while(count--)
 	{
+#ifdef HEWSIM
+		charput(*p++);
+#else
 		CPU_UartPutch(*p++);
+#endif
 	}
 	return(lastCount-count);
 }

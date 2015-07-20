@@ -79,7 +79,7 @@ mrb_value alarm_self_tbl[MAX_ALARM];
  */
 
 #define TOPPERS_ISTKSZ		DEFAULT_ISTKSZ
-static STK_T          		_kernel_stack[COUNT_STK_T(TOPPERS_ISTKSZ)];
+STK_T          		_kernel_stack[COUNT_STK_T(TOPPERS_ISTKSZ)];
 #define TOPPERS_STK   		_kernel_stack
 #define TOPPERS_STKSZ		ROUND_STK_T(TOPPERS_ISTKSZ)
 
@@ -96,6 +96,24 @@ STK_T *const	_kernel_stk = TOPPERS_STK;
 #ifdef TOPPERS_ISTKPT
 STK_T *const	_kernel_istkpt = TOPPERS_ISTKPT(TOPPERS_STK, TOPPERS_STKSZ);
 #endif /* TOPPERS_ISTKPT */
+
+/*-------------------------------------------
+ * タスク別スタック領域			takahashi
+ */
+STK_T	task_stack[TNUM_TSKID][COUNT_STK_T(TASK_STACKSZ)];
+
+
+/*---------------------------------------------
+ * タスク別コンテキスト保存領域		takahashi
+ */
+jmp_buf task_ctx[TNUM_TSKID];
+
+/*-----------------------------------------------
+ *  タスク待ち情報
+ */
+unsigned char task_wait[TNUM_TSKID];
+
+RELTIM	tskTout[TNUM_TSKID];
 
 /*
  *  Module Initialization Function
