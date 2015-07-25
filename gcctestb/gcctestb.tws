@@ -7,25 +7,7 @@
 [GENERAL_DATA]
 [BREAKPOINTS]
 [OPEN_WORKSPACE_FILES]
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\crt0.s" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gcctestb.c" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\include\target_kernel.h" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\interrupt_handlers.c" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\lowlvl-E1.asm" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\rx63nsci0.c" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\prc_support.asm" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\task.c" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\time_event.c" 
 [WORKSPACE_FILE_STATES]
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\crt0.s" 104 104 837 281 0 0 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gcctestb.c" 0 0 1064 202 0 8 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\include\target_kernel.h" 0 0 1158 319 0 1 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\interrupt_handlers.c" 52 52 867 183 0 4 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\lowlvl-E1.asm" 26 26 867 183 0 7 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\rx63nsci0.c" 0 0 1158 319 0 6 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\prc_support.asm" -8 -31 1158 319 1 3 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\task.c" 0 0 1158 319 0 2 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\time_event.c" 78 78 867 183 0 5 
 [LOADED_PROJECTS]
 "gcctestb" 
 [END]

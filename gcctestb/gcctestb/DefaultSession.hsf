@@ -8,7 +8,7 @@
 "" 
 [GENERAL_DATA]
 "FIRST_CONNECTION_TAG" "NO" 
-"MRULABELS_DATAMANAGER_KEY" "_prg_buff|1d80|1d8c|1d94|FFFFFFFF|00000000|H'00000000|H'00088000|H'0001ffff|H'FFF00000|H'00087010|fff16865|H'FFFF0000|H'0001FFFf|H'0001fff|1f000|1ff00|1FF74|1ff74|fff35a04" 
+"MRULABELS_DATAMANAGER_KEY" "00000000|_prg_buff|1d80|1d8c|1d94|FFFFFFFF|H'00000000|H'00088000|H'0001ffff|H'FFF00000|H'00087010|fff16865|H'FFFF0000|H'0001FFFf|H'0001fff|1f000|1ff00|1FF74|1ff74|fff35a04" 
 "RESET_CPU_AFTER_DOWNLOAD_TAG" "VARIANT_TRUE_STORE_TAG" 
 "{0AF60212-1285-4767-AB8A-73DB62CC8DBD}R_ECXOS_0ECXOS_OBJECT01" " " 
 "{0AF60212-1285-4767-AB8A-73DB62CC8DBD}R_ECXOS_0ECXOS_OBJECT02" " " 
@@ -645,7 +645,7 @@
 [LANGUAGE]
 "Japanese" 
 [CONFIG_INFO_VD1]
-1 
+0 
 [CONFIG_INFO_VD2]
 0 
 [CONFIG_INFO_VD3]
@@ -655,7 +655,7 @@
 [WINDOW_POSITION_STATE_DATA_VD1]
 "Debug" "TOOLBAR 0" 59419 2 4 "0.00" 0 0 0 0 0 17 0 "" "0.0" 
 "IO" "WINDOW" 59422 0 3 "0.56" 405 0 0 350 200 18 0 "32817|32826|32819|32820|32821|32829" "0.0" 
-"{WK_00000001_CmdLine}" "WINDOW" 59422 0 1 "0.12" 405 183 254 350 200 17 0 "32771|32772|32778|<<separator>>|32773|32774|<<separator>>|32820|<<separator>>|32801|32824" "0.0" 
+"{WK_00000001_CmdLine}" "WINDOW" 59422 0 1 "0.11" 405 183 254 350 200 17 0 "32771|32772|32778|<<separator>>|32773|32774|<<separator>>|32820|<<separator>>|32801|32824" "0.0" 
 "{WK_00000001_DEBUGCONSOLE}gcctestbDefaultSession" "WINDOW" 59422 0 2 "0.55" 277 0 0 350 200 18 0 "57634|57637|57633|<<separator>>|32781|32782|<<separator>>|32780|32785|32787" "0.0" 
 "{WK_00000001_DEBUGCONSOLE}" "WINDOW" 59422 0 2 "0.04" 405 0 0 350 200 17 0 "57634|57637|57633|<<separator>>|32781|32782|<<separator>>|32780|32785|32787" "0.0" 
 "{WK_00000001_IO}gcctestbDefaultSession" "WINDOW" 59422 0 3 "0.32" 405 0 0 350 200 17 0 "32817|32826|32819|32820|32821|32829" "0.0" 
@@ -697,15 +697,6 @@
 [WINDOW_POSITION_STATE_DATA_VD3]
 [WINDOW_POSITION_STATE_DATA_VD4]
 [WINDOW_Z_ORDER]
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\prc_support.asm" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\crt0.s" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\rx63nsci0.c" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\gcctestb.c" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\time_event.c" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\include\target_kernel.h" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\ssp\task.c" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\lowlvl-E1.asm" 
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\interrupt_handlers.c" 
 [TARGET_NAME]
 "RX E1/E20 SYSTEM" "" 0 
 [STATUSBAR_STATEINFO_VD1]
@@ -736,7 +727,7 @@
 [DEBUGGER_OPTIONS]
 "" 
 [DOWNLOAD_MODULES]
-"D:\usr\GR-SAKURA\mruby\gcctestb\gcctestb\SimDebug_RX600\gcctestb.x" 0 "Elf/Dwarf2_KPIT" 0 0 1 0 
+"$(PROJDIR)\SimDebug_RX600\gcctestb.x" 0 "Elf/Dwarf2_KPIT" 0 0 1 0 
 [CONNECT_ON_GO]
 "FALSE" 
 [DOWNLOAD_MODULES_AFTER_BUILD]
