@@ -9,15 +9,11 @@
 [OPEN_WORKSPACE_FILES]
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\arch\RX62N\target_kernel.h" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gcctestb.c" 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\hardware_setup.c" 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\interrupt_handlers.c" 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rx63nsci0.c" 
 [WORKSPACE_FILE_STATES]
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\arch\RX62N\target_kernel.h" -8 -31 961 520 1 2 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 78 78 863 158 0 0 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gcctestb.c" 130 130 789 325 0 4 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\hardware_setup.c" 78 78 867 162 0 3 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\interrupt_handlers.c" 26 26 867 162 0 1 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 130 130 785 321 0 0 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rx63nsci0.c" 156 156 789 325 0 1 
 [LOADED_PROJECTS]
 "gcctestb" 
 [END]

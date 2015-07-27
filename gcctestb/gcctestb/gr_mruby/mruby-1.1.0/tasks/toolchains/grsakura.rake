@@ -10,6 +10,7 @@ MRuby::Toolchain.new(:grsakura) do |conf|
     cc.include_paths = ["#{MRUBY_ROOT}/include"],
     cc.include_paths << "#{SSP_ROOT}/include"
     cc.include_paths << "#{SSP_ROOT}/ssp"
+    cc.include_paths << "#{SSP_ROOT}/arch/RX62N"
 
     cc.defines = %w(DISABLE_GEMS)
     cc.option_include_path = '-I%s'
