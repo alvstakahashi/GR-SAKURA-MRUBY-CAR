@@ -45,10 +45,21 @@ void Excep_FCUIF_FRDYI(void){ }
 void Excep_ICU_SWINT(void){ }
 
 // CMTU0_CMT0
+
+extern void CMI0(void);
+
 void Excep_CMT0_CMI0(void)
 { 
-//	_kernel_signal_time();
-	_kernel_default_int_handler_entry_c();
+	__asm__("pushc	fpsw;");
+	__asm__("mvfacmi	r5;");
+	__asm__("shll	#16, r5;");
+	__asm__("mvfachi	r4;");
+	__asm__("pushm	r4-r5;");
+	_kernel_handler(CMI0);
+	__asm__("popm	r4-r5;");
+	__asm__("mvtaclo	r5;");
+	__asm__("mvtachi	r4;");
+	__asm__("popc	fpsw;");
 }
 
 // CMTU1_CMT1

@@ -59,6 +59,7 @@
 
 
 #if defined __GNUC__
+#define Inline	static __inline__	/* インライン関数 */
 #endif
 
 /*
@@ -118,6 +119,21 @@ static void
 enaint( void )
 {
 	setpsw	i
+}
+#endif
+
+
+#if defined __GNUC__
+static inline void ipl_maskClear( void )
+{
+	__asm__("MVTIPL #0");
+}
+#else
+#pragma inline_asm	ipl_maskClear
+static void 
+ipl_maskClear(void)
+{
+	MVTIPL	#0
 }
 #endif
 /*
@@ -193,6 +209,7 @@ static
 void idle_loop(void)
 {
 	t_unlock_cpu();
+	ipl_maskClear();
 	t_lock_cpu();
 }
 
@@ -201,6 +218,13 @@ void idle_loop(void)
  *  プロセッサステータスレジスタ(PSW)の現在値の読出し
  */
 #if defined __GNUC__
+Inline int current_psw(void)
+{
+	int status;
+	__asm__("mvfc	psw,%[Rd]":[Rd]"=r"(status));
+	return(status);
+}
+
 #else
 #pragma inline_asm	current_psw
 static uint32_t
@@ -246,7 +270,20 @@ bool_t sense_context( void )
 	return ( intnest > 0U );
 }
 
-
+#if defined __GNUC__
+static inline void
+set_task_stack( intptr_t stkp )
+{
+	__asm__("MVTC	R1,isp");
+}
+#else
+#pragma inline_asm	set_task_stack
+static void
+set_task_stack( intptr_t stkp )
+{
+	MVTC	R1,isp
+}
+#endif
 
 #endif /* TOPPERS_TARGET_KERNEL_H */
 #endif

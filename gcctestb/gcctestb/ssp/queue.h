@@ -53,7 +53,9 @@
 #define TOPPERS_QUEUE_H
 
 #if defined __GNUC__
+#ifndef Inline
 #define Inline static inline
+#endif
 #endif
 
 

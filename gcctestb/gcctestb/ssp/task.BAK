@@ -397,23 +397,3 @@ dispatcher(void)
 }
 
 #endif /* TOPPERS_tsk_dsp */
-void handler(INTHDR userhandler)
-{
-	volatile static intptr_t newtskipi;
-	
-	intnest++;						//割り込みネスト数インクリメント
-	i_unlock_cpu();					//割り込み許可
-	(*userhandler)();				//ユーザーハンドラ呼び出し
-	i_lock_cpu();					//割り込み不可
-	intnest--;						//割り込みネスト数デクリメント
-
-	if (intnest == 0)				//多重割り込み中でない
-	{
-		if (reqflg !=0)				//スケジュール必要
-		{
-			reqflg = 0;
-			run_task(search_schedtsk());
-		}
-	}
-}
-
