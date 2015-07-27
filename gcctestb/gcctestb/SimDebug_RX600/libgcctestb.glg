@@ -1,5 +1,0 @@
---compiler-options=-mcpu=rx600,-mlittle-endian-data,-mint-register=0,-Os,-fdata-sections,-ffunction-sections,-falign-jumps,-fno-function-cse,-funit-at-a-time
---assembler-options=--mlittle-endian-data,--m32bit-doubles
---output="D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\SimDebug_RX600\libgcctestb.a"
---select-lib=newlib
---header-files=all
