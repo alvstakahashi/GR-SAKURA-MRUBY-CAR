@@ -110,6 +110,7 @@ MRuby::CrossBuild.new('grsakura') do |conf|
 #   conf.gem "#{root}/mrbgems/mruby-sprintf"
    conf.gem "#{root}/mrbgems/mruby-math"
 
+  conf.gem 'mrbgems/mruby-ssp-delay'
   conf.gem 'mrbgems/mruby-rx-getc'
   conf.gem 'mrbgems/mruby-ssp-thread'
   conf.gem 'mrbgems/mruby-ssp-alarm'

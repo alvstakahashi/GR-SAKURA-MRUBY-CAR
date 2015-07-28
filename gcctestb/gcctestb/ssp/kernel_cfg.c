@@ -20,7 +20,7 @@ const ID _kernel_tmax_tskid = (TMIN_TSKID + TNUM_TSKID - 1);
 const ATR     	_kernel_tinib_tskatr[TNUM_TSKID]    = {(TA_ACT),(TA_NULL),(TA_NULL),(TA_NULL),(TA_NULL)};
 const uint_t	_kernel_init_rdypmap = 1U;
 const intptr_t	_kernel_tinib_exinf[TNUM_TSKID]     = {(intptr_t)(1),(intptr_t)(2),(intptr_t)(3),(intptr_t)(4),(intptr_t)(5)};
-const TASK    	_kernel_tinib_task[TNUM_TSKID]      = {(main),(task2),(mrb_ssp_thread_call),(mrb_ssp_thread_call),(mrb_ssp_thread_call)};
+const TASK    	_kernel_tinib_task[TNUM_TSKID]      = {(main),(task2),(mrb_sonic_thread),(mrb_ssp_thread_call),(mrb_ssp_thread_call)};
 const uint_t  	_kernel_tinib_epriority[TNUM_TSKID] = {INT_PRIORITY(1),INT_PRIORITY(2),INT_PRIORITY(3),INT_PRIORITY(4),INT_PRIORITY(5)};
 
 /*
@@ -33,7 +33,7 @@ const uint_t _kernel_cycevtid_offset = 0;
 const uint_t _kernel_cycinib_cycact = 0;
 const intptr_t _kernel_cycinib_exinf[TNUM_CYCID] = {(intptr_t)(1),(intptr_t)(2),(intptr_t)(3),(intptr_t)(4),(intptr_t)(5)};
 const CYCHDR _kernel_cycinib_cychdr[TNUM_CYCID] = {(mrb_ssp_cyclic_call),(mrb_ssp_cyclic_call),(mrb_sonic_sence_handler),(mrb_ssp_cyclic_call),(mrb_ssp_cyclic_call)};
-const RELTIM _kernel_cycinib_cyctim[TNUM_CYCID] = {(2000),(2000),(1),(100000),(50000)};
+const RELTIM _kernel_cycinib_cyctim[TNUM_CYCID] = {(2000),(2000),(10000),(100000),(50000)};
 const RELTIM _kernel_cycinib_cycphs[TNUM_CYCID] = {(0),(0),(0),(0),(0)};
 
 uint_t _kernel_cyccb_cycact;
@@ -75,6 +75,19 @@ mrb_value task_self_tbl[MAX_TASK];
 mrb_value cyclic_self_tbl[MAX_CYCLIC];
 mrb_value alarm_self_tbl[MAX_ALARM];
 mrb_value sonic_self_tbl[MAX_SONIC];
+
+typedef struct 
+{
+	int phase;
+	int event;
+	int count;
+	int accel_status;
+	mrb_value	thread;
+	int	cycid;
+} Sonic_T;
+
+Sonic_T sonic_cb;	
+
 
 /*
  *  Stack Area for System

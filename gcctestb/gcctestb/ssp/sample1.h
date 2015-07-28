@@ -12,6 +12,7 @@ extern void 	mrb_ssp_cyclic_call(intptr_t arg);
 extern void 	mrb_ssp_alarm_call(intptr_t arg);
 
 extern void mrb_sonic_sence_handler(intptr_t exf);
+extern void mrb_sonic_thread(intptr_t exf);
 
 
 #endif /* TOPPERS_MACRO_ONLY */

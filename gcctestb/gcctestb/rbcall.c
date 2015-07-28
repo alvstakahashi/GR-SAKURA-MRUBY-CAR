@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#include <iodefine.h>
+#include <kernel.h>
 
 mrb_state *mrb_global;
 mrb_irep *idx_code1 = 0;

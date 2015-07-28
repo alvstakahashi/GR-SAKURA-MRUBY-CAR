@@ -8,13 +8,13 @@
 
 #define MAIN_TASK	1
 #define TASK2_ID	2
-#define RUBY_TSK3	3
-#define RUBY_TSK4	4
+#define SONIC_TSK	3
+#define SONIC_BRK	4
 #define RUBY_TSK5	5
 
 #define RUBY_CYC1	1
 #define RUBY_CYC2	2
-#define RUBY_SONIC_CYC3	3
+#define SONIC_CYC	3
 #define RUBY_CYC4	4
 #define RUBY_CYC5	5
 

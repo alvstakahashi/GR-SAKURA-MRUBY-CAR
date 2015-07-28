@@ -5,8 +5,9 @@ class SenseThread < Ssp_thread
 	end
 	def thread(n)
 		p "sense thread here count=" + n.to_s
-		if n > 100 then
+		if n < 2000 then
 			@accel.stop
+			p "accel stop Now!!"
 		end
 	end
 end
@@ -77,7 +78,7 @@ class MainThread < Ssp_thread
 		
 		  while 1 do
     		width = 0
-
+		begin
 		    p "please hit any key!"
 			command = Rx_getc()
 			p "getc = " + command.to_s
@@ -105,7 +106,10 @@ class MainThread < Ssp_thread
 				p "width =" + width.to_s
 				stear.Start(width)
 			end
-		    GC.start
+#		    GC.start
+		  rescue e
+			p e.massage
+		  end
 		  end
 ###---------------------------------
 	end
