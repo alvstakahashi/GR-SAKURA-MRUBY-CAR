@@ -329,8 +329,8 @@ run_task(uint_t ipri)
 		runtsk_ipri = tinib_epriority[next_pri];
 		
 		/* CPUロック解除 */
+		ipl_maskClear();		
 		t_unlock_cpu();
-		
 		/* タスク実行開始 */
 		(*((TASK)(tinib_task[next_pri])))(tinib_exinf[next_pri]);
 		

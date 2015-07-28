@@ -15,6 +15,48 @@
 mrb_state *mrb_global;
 mrb_irep *idx_code1 = 0;
 
+mrb_value
+mrb_ssp_delay_delayDEBUG(mrb_state *mrb, mrb_value self)
+{
+	ER retval;
+	mrb_int	tout;
+    mrb_value argv;
+    
+    SYSTIM  startTime;
+    SYSTIM  targetTime;
+    SYSTIM	currentTime;
+
+  	mrb_get_args(mrb, "o", &argv);
+  	tout = mrb_fixnum(argv);
+#if 1
+	printf("mrb_ssp_delay tout = %d\n",tout);
+#endif
+//	int ai = mrb_gc_arena_save(mrb);
+	get_tim(&startTime);
+	targetTime = startTime + tout*100;
+	if (targetTime < startTime)		// オーバーフロー
+	{
+		while(1)
+		{
+			get_tim(&currentTime);
+			if (startTime > currentTime)	//オーバーフロー
+			{
+				break;
+			}
+		}
+	}
+	while(1)
+	{
+		get_tim(&currentTime);
+		if (currentTime >= targetTime)
+		{
+			break;
+		}
+	}
+//	retval = dly_tsk(tout);
+//  	mrb_gc_arena_restore(mrb, ai);
+	return argv;
+}
 
 
 void mruby_call(const uint8_t *mrb_p )

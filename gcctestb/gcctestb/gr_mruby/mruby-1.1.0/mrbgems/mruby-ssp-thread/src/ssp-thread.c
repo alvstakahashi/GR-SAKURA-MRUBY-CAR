@@ -55,7 +55,7 @@ mrb_ssp_thread_act(mrb_state *mrb, mrb_value self)
 
 	retval = act_tsk(id_num);
 
-	if (retval == E_OK)
+	if (retval != E_OK)
 	{
 		return(mrb_false_value());
 	}
@@ -124,7 +124,7 @@ mrb_mruby_ssp_thread_gem_init(mrb_state* mrb) {
 
 	/* methods */
 	mrb_define_method(mrb, ssp, "initialize", mrb_ssp_thread_initialize, ARGS_REQ(2));
-	mrb_define_method(mrb, ssp, "act", mrb_ssp_thread_act, ARGS_NONE());
+	mrb_define_method(mrb, ssp, "act" , mrb_ssp_thread_act, ARGS_NONE());
 	mrb_define_method(mrb, ssp, "iact", mrb_ssp_thread_iact, ARGS_NONE());
 
 }
