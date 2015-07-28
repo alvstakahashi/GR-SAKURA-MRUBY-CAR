@@ -66,7 +66,7 @@ mrb_ssp_thread_act(mrb_state *mrb, mrb_value self)
 	}
 	retval = act_tsk(id_num);
 
-	if (retval == E_OK)
+	if (retval != E_OK)
 	{
 		return(mrb_false_value());
 	}
