@@ -35,8 +35,8 @@ void HardwareSetup(void)
 
 //	PORT1.DDR.BIT.B5 = 1;				// P15 is Output
 	MSTP( CMT0 ) = 0;					// Wakeup CMT0,CMT1
-	CMT0.CMCOR = 48000/8/100 ;				// CMCOR is 500ms Count / 500 /100 で　10us 
-//	CMT0.CMCOR = 48000/8/1000 ;				// CMCOR is 500ms Count / 500 /1000 で　1us 
+//	CMT0.CMCOR = 48000/8/100 ;				// CMCOR is 500ms Count / 500 /100 で　10us 
+	CMT0.CMCOR = 48000/8/1000 ;				// CMCOR is 500ms Count / 500 /1000 で　1us 
 //	CMT0.CMCOR = 468  - 1;				// CMCOR is 500ms Count / 500 /100 で　10us 
 	CMT0.CMCR.WORD = 0x0040;			// CMIE is Enable,CKS is PCLK/8
 	

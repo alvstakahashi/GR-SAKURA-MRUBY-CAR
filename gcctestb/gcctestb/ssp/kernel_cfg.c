@@ -32,8 +32,8 @@ const uint_t _kernel_cycevtid_offset = 0;
 
 const uint_t _kernel_cycinib_cycact = 0;
 const intptr_t _kernel_cycinib_exinf[TNUM_CYCID] = {(intptr_t)(1),(intptr_t)(2),(intptr_t)(3),(intptr_t)(4),(intptr_t)(5)};
-const CYCHDR _kernel_cycinib_cychdr[TNUM_CYCID] = {(mrb_ssp_cyclic_call),(mrb_ssp_cyclic_call),(mrb_ssp_cyclic_call),(mrb_ssp_cyclic_call),(mrb_ssp_cyclic_call)};
-const RELTIM _kernel_cycinib_cyctim[TNUM_CYCID] = {(2000),(2000),(50000),(100000),(50000)};
+const CYCHDR _kernel_cycinib_cychdr[TNUM_CYCID] = {(mrb_ssp_cyclic_call),(mrb_ssp_cyclic_call),(mrb_sonic_sence_handler),(mrb_ssp_cyclic_call),(mrb_ssp_cyclic_call)};
+const RELTIM _kernel_cycinib_cyctim[TNUM_CYCID] = {(2000),(2000),(1),(100000),(50000)};
 const RELTIM _kernel_cycinib_cycphs[TNUM_CYCID] = {(0),(0),(0),(0),(0)};
 
 uint_t _kernel_cyccb_cycact;
@@ -69,10 +69,12 @@ uintptr_t _kernel_tmevt_arg[TNUM_TMEVT];
 #define MAX_TASK	8
 #define MAX_CYCLIC	8
 #define MAX_ALARM	8
+#define MAX_SONIC	8
 
 mrb_value task_self_tbl[MAX_TASK];
 mrb_value cyclic_self_tbl[MAX_CYCLIC];
 mrb_value alarm_self_tbl[MAX_ALARM];
+mrb_value sonic_self_tbl[MAX_SONIC];
 
 /*
  *  Stack Area for System

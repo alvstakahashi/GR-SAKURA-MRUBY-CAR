@@ -21,16 +21,22 @@ mrb_ssp_thread_initialize(mrb_state *mrb, mrb_value self)
 	  mrb_value name;
 	  char *name_cstr;	
 	  mrb_int	id_num;
+	  mrb_value	opt;
 
 #if 1  	  
   	  printf("thread_initialize &self = %08x self = %08x %08x tbl=%08x\n",
   	  		  (int)&self,*((int*)&self),*(((int*)&self)+1),(int)task_self_tbl);
 #endif
 
+	  opt = mrb_fixnum_value(0);
+
 	  mrb_get_args(mrb, "So",&name, &id);
 
 	  mrb_iv_set(mrb, self, mrb_intern_lit(mrb, "@task_id"),id );
 	  mrb_iv_set(mrb, self, mrb_intern_lit(mrb, "@task_name"),name );
+
+	  mrb_iv_set(mrb, self, mrb_intern_lit(mrb, "@opt"),opt );
+
 
 	  id_num = mrb_fixnum(id);
 	  
@@ -50,9 +56,14 @@ static mrb_value
 mrb_ssp_thread_act(mrb_state *mrb, mrb_value self)
 {
 	ER retval;
+	mrb_value opt;
 	mrb_value id   = mrb_iv_get(mrb, self, mrb_intern_lit(mrb, "@task_id"));
 	mrb_int id_num = mrb_fixnum(id);
 
+	if (mrb_get_args(mrb, "|o",&opt) == 1)	//Žw’è‚ ‚è
+	{
+		mrb_iv_set(mrb, self, mrb_intern_lit(mrb, "@opt"),opt );
+	}
 	retval = act_tsk(id_num);
 
 	if (retval == E_OK)
@@ -64,9 +75,17 @@ mrb_ssp_thread_act(mrb_state *mrb, mrb_value self)
 static mrb_value
 mrb_ssp_thread_iact(mrb_state *mrb, mrb_value self)
 {
+	mrb_value opt;
 	ER retval;
 	mrb_value id   = mrb_iv_get(mrb, self, mrb_intern_lit(mrb, "@task_id"));
 	mrb_int id_num = mrb_fixnum(id);
+
+	if (mrb_get_args(mrb, "|o",&opt) == 1)	//Žw’è‚ ‚è
+	{
+		mrb_iv_set(mrb, self, mrb_intern_lit(mrb, "@opt"),opt );
+	}
+
+
 	retval = iact_tsk(id_num);
 
 	if (retval != E_OK)
@@ -97,20 +116,28 @@ mrb_ssp_thread_call(intptr_t exf)
 	
 	mrb_value name = mrb_iv_get(mrb_global, self, mrb_intern_lit(mrb_global, "@task_name"));
 	mrb_value id   = mrb_iv_get(mrb_global, self, mrb_intern_lit(mrb_global, "@task_id"));
+	mrb_value opt  = mrb_iv_get(mrb_global, self, mrb_intern_lit(mrb_global, "@opt"));
 // 	char *name_cstr = mrb_str_to_cstr(mrb_global, name);	
     strncpy(name_cstr, RSTRING_PTR(name), RSTRING_LEN(name));
     name_cstr[RSTRING_LEN(name)]='\0';
 
     
 #if 1
-	printf("mrb_ssp_thread_call exf = %d cstr=%s id = %d\n",
-			exf,name_cstr,mrb_fixnum(id));
+	printf("mrb_ssp_thread_call exf = %d cstr=%s id = %d opt = %d\n",
+			exf,name_cstr,mrb_fixnum(id),mrb_fixnum(opt));
 #endif
 	
 #if 0
 	mrb_funcall(mrb_global, mrb_top_self(mrb_global), "thread",1, id);
 #else
-	mrb_funcall(mrb_global, self, (const char *)name_cstr,1, id);
+	if (mrb_fixnum(opt) != 0)
+	{
+		mrb_funcall(mrb_global, self, (const char *)name_cstr,1, opt);
+	}
+	else
+	{
+		mrb_funcall(mrb_global, self, (const char *)name_cstr,1, id);
+	}
 //	mrb_funcall(mrb_global, self, "thread",1, id);
 #endif
 }
@@ -124,8 +151,8 @@ mrb_mruby_ssp_thread_gem_init(mrb_state* mrb) {
 
 	/* methods */
 	mrb_define_method(mrb, ssp, "initialize", mrb_ssp_thread_initialize, ARGS_REQ(2));
-	mrb_define_method(mrb, ssp, "act", mrb_ssp_thread_act, ARGS_NONE());
-	mrb_define_method(mrb, ssp, "iact", mrb_ssp_thread_iact, ARGS_NONE());
+	mrb_define_method(mrb, ssp, "act", mrb_ssp_thread_act, ARGS_OPT(1));
+	mrb_define_method(mrb, ssp, "iact", mrb_ssp_thread_iact, ARGS_OPT(1));
 
 }
 

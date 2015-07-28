@@ -14,7 +14,7 @@
 
 #define RUBY_CYC1	1
 #define RUBY_CYC2	2
-#define RUBY_CYC3	3
+#define RUBY_SONIC_CYC3	3
 #define RUBY_CYC4	4
 #define RUBY_CYC5	5
 

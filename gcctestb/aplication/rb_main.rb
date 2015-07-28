@@ -4,8 +4,12 @@ class Mycyclic < Ssp_cyclic
 		@thread = thread
 	end
 	def cyclic(n)
-		puts "cyclic here " + n.to_s	
-		@thread.iact
+		puts "cyclic here " + n.to_s
+		begin	
+			@thread.iact
+		rescue => e
+			p e.message
+		end
 	end
 end
 
@@ -47,8 +51,8 @@ end
 
   thread_0   = Mythread.new(3,led0)
   thread_1   = Mythread_gc.new(4,led1)
-  cyclic_0   = Mycyclic.new(3,thread_0)
-  cyclic_1   = Mycyclic.new(4,thread_1)
+  cyclic_0   = Mycyclic.new(4,thread_0)
+  cyclic_1   = Mycyclic.new(5,thread_1)
   cyclic_0.start
   cyclic_1.start
 

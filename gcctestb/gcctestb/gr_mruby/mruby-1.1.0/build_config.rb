@@ -116,6 +116,7 @@ MRuby::CrossBuild.new('grsakura') do |conf|
   conf.gem 'mrbgems/mruby-ssp-cyclic'
   conf.gem 'mrbgems/mruby-rx-gpio'
   conf.gem 'mrbgems/mruby-rx-rcservo'
+  conf.gem 'mrbgems/mruby-sonic-sence'
 
    conf.gem :core => "mruby-print"
 #

@@ -7,7 +7,39 @@
 [GENERAL_DATA]
 [BREAKPOINTS]
 [OPEN_WORKSPACE_FILES]
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gcctestb.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\hardware_setup.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\include\target_kernel.h" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\interrupt_handlers.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\mrb_read.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rbcall.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rx63nsci0.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\sonic-sence2.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\cyclic.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\prc_support.asm" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\queue.h" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\sample1.h" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\task.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\time_event.c" 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\target_support.src" 
 [WORKSPACE_FILE_STATES]
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 0 0 863 179 0 0 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gcctestb.c" 52 52 867 183 0 6 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\hardware_setup.c" 0 0 841 253 0 15 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\include\target_kernel.h" 0 0 867 183 0 8 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\interrupt_handlers.c" 52 52 841 253 0 12 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\mrb_read.c" 0 0 841 253 0 10 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rbcall.c" 26 26 867 183 0 5 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rx63nsci0.c" -8 -31 961 396 1 9 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\sonic-sence2.c" 78 78 867 183 0 3 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\cyclic.c" 78 78 841 253 0 13 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\prc_support.asm" 78 78 867 183 0 7 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\queue.h" 104 104 841 253 0 14 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\sample1.h" 52 52 867 183 0 2 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\task.c" 0 0 867 183 0 4 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\time_event.c" 26 26 867 183 0 1 
+"D:\usr\homedata\freesummer\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\target_support.src" 26 26 841 253 0 11 
 [LOADED_PROJECTS]
 "gcctestb" 
 [END]
