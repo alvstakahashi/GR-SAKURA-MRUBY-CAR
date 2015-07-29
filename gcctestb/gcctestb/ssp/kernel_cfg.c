@@ -84,6 +84,7 @@ typedef struct
 	int accel_status;
 	mrb_value	thread;
 	int	cycid;
+	int limit;
 } Sonic_T;
 
 Sonic_T sonic_cb;	

@@ -29,6 +29,7 @@ typedef struct
 	int accel_status;
 	mrb_value	thread;
 	int	cycid;
+	int limit;
 } Sonic_T;
 
 extern  Sonic_T sonic_cb;	
@@ -64,7 +65,7 @@ void mrb_sonic_thread(intptr_t exf)
 	while(PORT2.PIDR.BIT.B4 == HIGH_P)
 	{
 		us_delay(1);
-		if (++sonic_cb.count > 4500)	// 1M以上は未検地
+		if (++sonic_cb.count > sonic_cb.limit)	// 1M以上は未検地
 		{
 			return;
 		}
@@ -78,16 +79,21 @@ void mrb_sonic_thread(intptr_t exf)
 	if (sonic_cb.accel_status != 0)
 	{
 		//スレッド起動
-		mrb_funcall(mrb_global,sonic_cb.thread, "act",1,refCount);
+		mrb_value status = mrb_funcall(mrb_global,sonic_cb.thread, "act",1,refCount);
+		if (mrb_fixnum(status) != 0)
+		{
+			sonic_cb.accel_status = 0;
+		}
 	}
 }
 
 static mrb_value
 mrb_sonic_sence_initialize(mrb_state *mrb, mrb_value self)
 {
-	// 周期ハンドラID とスレッドインスタンスが渡される
+	// 周期ハンドラID とスレッドインスタンスと閾値が渡される
 	  mrb_value cycid;
 	  mrb_value thread;
+	  mrb_value limit;
 
 //	  char *name_cstr;	
 //	  mrb_int	id_num;
@@ -97,7 +103,7 @@ mrb_sonic_sence_initialize(mrb_state *mrb, mrb_value self)
   	  		  (int)&self,*((int*)&self),*(((int*)&self)+1),(int)task_self_tbl);
 #endif
 
-	  mrb_get_args(mrb, "oo",&cycid,&thread);
+	  mrb_get_args(mrb, "ooo",&cycid,&thread,&limit);
 
 	  mrb_iv_set(mrb, self, mrb_intern_lit(mrb, "@thread"),thread );
 	  mrb_iv_set(mrb, self, mrb_intern_lit(mrb, "@cycid"),cycid );
@@ -106,9 +112,10 @@ mrb_sonic_sence_initialize(mrb_state *mrb, mrb_value self)
 	  
 	  sonic_self_tbl[id_num-1] = self;
 /**/
-
+	memset(&sonic_cb,0,sizeof(Sonic_T));
 	sonic_cb.thread = thread;
 	sonic_cb.cycid  = id_num;
+	sonic_cb.limit  = mrb_fixnum(limit);
 /**/
 #if 1
 	printf("mrb_sonic_sence_initialize id = %d\n",id_num);
@@ -146,7 +153,7 @@ mrb_mruby_sonic_sence_gem_init(mrb_state* mrb) {
 	sonic = mrb_define_class(mrb, "SonicSence", mrb->object_class);
 
 	/* methods */
-	mrb_define_method(mrb, sonic, "initialize", mrb_sonic_sence_initialize, ARGS_REQ(2));
+	mrb_define_method(mrb, sonic, "initialize", mrb_sonic_sence_initialize, ARGS_REQ(3));
 	mrb_define_method(mrb, sonic, "start", mrb_sonic_sence_start, ARGS_NONE());
 //	mrb_define_method(mrb, sonic, "stop", mrb_sonic_sence_stop, ARGS_NONE());
 	mrb_define_method(mrb, sonic, "getTime", mrb_sonic_sence_gettime, ARGS_NONE());
