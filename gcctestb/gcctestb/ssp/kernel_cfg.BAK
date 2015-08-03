@@ -33,6 +33,9 @@ extern unsigned char task_wait[TNUM_TSKID];
 
 extern RELTIM	tskTout[TNUM_TSKID];
 
+extern void *ruby_ci_tbl[];
+
+#define mrb_ci_cp(x,y)	x=y
 
 #endif /* TOPPERS_KERNEL_CFG_H */
 

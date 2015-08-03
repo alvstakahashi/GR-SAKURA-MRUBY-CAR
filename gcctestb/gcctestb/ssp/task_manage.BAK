@@ -79,6 +79,7 @@ extern mrb_state *mrb_global;
 
 extern struct mrb_context *ruby_ctx_current[];
 
+void mrb_ci_cp(volatile struct mrb_context *to,volatile struct mrb_context *from);
 
 /*
  *  タスクの起動

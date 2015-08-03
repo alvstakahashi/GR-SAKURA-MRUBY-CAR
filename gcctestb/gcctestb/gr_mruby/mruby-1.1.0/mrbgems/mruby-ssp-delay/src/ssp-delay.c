@@ -2,25 +2,17 @@
 #include "mruby/string.h"
 #include <stdio.h>
 #include <string.h>
+#include "kernel_impl.h"
+#include "task.h"
 
-#include <kernel.h>
+#include "kernel_cfg.h"
+
+mrb_value
+mrb_ssp_delay_delayDEBUG(mrb_state *mrb, mrb_value self);
 
 mrb_value
 mrb_ssp_delay_delay(mrb_state *mrb, mrb_value self)
 {
-	ER retval;
-	mrb_int	tout;
-    mrb_value argv;
-
-  	mrb_get_args(mrb, "o", &argv);
-  	tout = mrb_fixnum(argv);
-#if 0
-	printf("mrb_ssp_delay tout = %d\n",tout);
-#endif
-//	int ai = mrb_gc_arena_save(mrb);
-	retval = dly_tsk(tout);
-//  	mrb_gc_arena_restore(mrb, ai);
-	return argv;
 }
 
 void
@@ -28,7 +20,7 @@ mrb_mruby_ssp_delay_gem_init(mrb_state* mrb)
 {
   	struct RClass *krn;
   	krn = mrb->kernel_module;
-  	mrb_define_method(mrb, krn, "Ssp_delay", mrb_ssp_delay_delay, MRB_ARGS_REQ(1));
+  	mrb_define_method(mrb, krn, "Ssp_delay", mrb_ssp_delay_delayDEBUG, MRB_ARGS_REQ(1));
 }
 
 //  struct RClass *krn;

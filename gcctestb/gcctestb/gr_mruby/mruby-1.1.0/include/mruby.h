@@ -83,11 +83,11 @@ enum mrb_fiber_state {
 struct mrb_context {
   struct mrb_context *prev;
 
-  mrb_value *stack;                       /* stack of virtual machine */
-  mrb_value *stbase, *stend;
+  volatile mrb_value *stack;                       /* stack of virtual machine */
+  volatile mrb_value *stbase, *stend;
 
-  mrb_callinfo *ci;
-  mrb_callinfo *cibase, *ciend;
+  volatile mrb_callinfo *ci;
+  volatile mrb_callinfo *cibase, *ciend;
 
   mrb_code **rescue;                      /* exception handler stack */
   int rsize;
@@ -114,7 +114,7 @@ typedef struct mrb_state {
   mrb_allocf allocf;                      /* memory allocation function */
   void *allocf_ud;                        /* auxiliary data of allocf */
 
-  struct mrb_context *c;
+  volatile struct mrb_context *c;
   struct mrb_context *root_c;
 
   struct RObject *exc;                    /* exception */

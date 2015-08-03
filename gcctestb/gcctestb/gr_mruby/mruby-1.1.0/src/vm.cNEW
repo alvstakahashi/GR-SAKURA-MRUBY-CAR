@@ -3,10 +3,12 @@
 **
 ** See Copyright Notice in mruby.h
 */
-
+#if 1
 #include <stddef.h>
 #include <stdarg.h>
 #include <math.h>
+#include <stdio.h>
+
 #include "mruby.h"
 #include "mruby/array.h"
 #include "mruby/class.h"
@@ -27,8 +29,6 @@
 #include "task.h"
 
 #include "kernel_cfg.h"
-extern struct mrb_context *ruby_ctx_top[];
-extern struct mrb_context *ruby_ctx_current[];
 
 #endif
 
@@ -88,50 +88,38 @@ stack_copy(mrb_value *dst, const mrb_value *src, size_t size)
     *dst++ = *src++;
   }
 }
+
+
+#ifdef ALVSTAKAHASHI
+
+static mrb_value 
+body_func(mrb_state *mrb,struct RProc *m,mrb_value recv)
+{
+	mrb_callinfo dummy;
+	mrb_callinfo *save_new_save;
+
+	mrb_callinfo *save                        = mrb->c->ci;
+	static volatile mrb_callinfo *save_new    = save;
+
+	mrb_value result = m->body.func(mrb, recv);
+
 #if 0
-void mrb_ci_cp(struct mrb_context *to,struct mrb_context *from)
-{
-	to->stbase = from->stbase;
-	to->stend  = from->stend;
-	to->stack  = from->stack;
-	
-	to->cibase = from->cibase;
-	to->ciend  = from->ciend;
-	to->ci     = from->ci;
-}
-	
-static void
-stack_init(mrb_state *mrb)
-{
-//  struct mrb_context *c;
-  struct mrb_context *tc;
-  int i;
-  static const struct mrb_context mrb_context_zero = { 0 };
-
-  for(i=0;i<TNUM_TSKID;i++)
-  {
-  	tc = ruby_ctx_top[i];
-  	/* mrb_assert(mrb->stack == NULL); */
-  	tc->stbase = (mrb_value *)mrb_calloc(mrb, STACK_INIT_SIZE, sizeof(mrb_value));
-  	tc->stend = tc->stbase + STACK_INIT_SIZE;
-  	tc->stack = tc->stbase;
-
-  	/* mrb_assert(ci == NULL); */
-  	tc->cibase = (mrb_callinfo *)mrb_calloc(mrb, CALLINFO_INIT_SIZE, sizeof(mrb_callinfo));
-  	tc->ciend = tc->cibase + CALLINFO_INIT_SIZE;
-  	tc->ci = tc->cibase;
-  	tc->ci->target_class = mrb->object_class;
-  	tc->ci->stackent = tc->stack;
-
-  }
-  i = get_ipri_self(TSK_SELF);
-  mrb_ci_cp(mrb->c,ruby_ctx_top[i]);
-}
-
+	save_new_save = save_new;
+	if (save_new_save != save)		//古いのが帰って来た
+	{
+		//スワップ
+		memcpy(&dummy,save,sizeof(mrb_callinfo));
+		memcpy(save,save_new_save,sizeof(mrb_callinfo));
+		memcpy(save_new_save,&dummy,sizeof(mrb_callinfo));
+	}
+	mrb->c->ci = save_new_save;
 #else
-void mrb_ci_cp(struct mrb_context *to,struct mrb_context *from)
-{
+	mrb->c->ci = save;
+#endif
+	return(result);
 }
+#endif
+
 static void
 stack_init(mrb_state *mrb)
 {
@@ -148,10 +136,7 @@ stack_init(mrb_state *mrb)
   c->ci = c->cibase;
   c->ci->target_class = mrb->object_class;
   c->ci->stackent = c->stack;
-
 }
-#endif
-
 
 static inline void
 envadjust(mrb_state *mrb, mrb_value *oldbase, mrb_value *newbase)
@@ -443,7 +428,11 @@ mrb_funcall_with_block(mrb_state *mrb, mrb_value self, mrb_sym mid, mrb_int argc
       int ai = mrb_gc_arena_save(mrb);
 
       ci->acc = CI_ACC_DIRECT;
+#ifdef ALVSTAKAHASHI
+	  val = body_func(mrb,p,self);
+#else
       val = p->body.func(mrb, self);
+#endif
       mrb->c->stack = mrb->c->ci->stackent;
       cipop(mrb);
       mrb_gc_arena_restore(mrb, ai);
@@ -518,9 +507,12 @@ mrb_f_send(mrb_state *mrb, mrb_value self)
   }
 
   if (MRB_PROC_CFUNC_P(p)) {
+#ifdef ALVSTAKAHASHI
+	return  body_func(mrb,p,self);
+#else
     return p->body.func(mrb, self);
+#endif
   }
-
   ci->nregs = p->body.irep->nregs;
   ci = cipush(mrb);
   ci->nregs = 0;
@@ -549,7 +541,11 @@ eval_under(mrb_state *mrb, mrb_value self, mrb_value blk, struct RClass *c)
   p = mrb_proc_ptr(blk);
   ci->proc = p;
   if (MRB_PROC_CFUNC_P(p)) {
+#ifdef ALVSTAKAHASHI
+	return  body_func(mrb,p,self);
+#else
     return p->body.func(mrb, self);
+#endif
   }
   ci->nregs = p->body.irep->nregs;
   ci = cipush(mrb);
@@ -665,7 +661,11 @@ mrb_yield_with_class(mrb_state *mrb, mrb_value b, mrb_int argc, const mrb_value 
   mrb->c->stack[argc+1] = mrb_nil_value();
 
   if (MRB_PROC_CFUNC_P(p)) {
+#ifdef ALVSTAKAHASHI
+	val = body_func(mrb,p,self);
+#else
     val = p->body.func(mrb, self);
+#endif
     mrb->c->stack = mrb->c->ci->stackent;
     cipop(mrb);
   }
@@ -745,8 +745,9 @@ argnum_error(mrb_state *mrb, mrb_int num)
 #endif
 
 #ifndef DIRECT_THREADED
+void idle_loop(void);
 
-#define INIT_DISPATCH for (;;) {  i = *pc; CODE_FETCH_HOOK(mrb, irep, pc, regs); switch (GET_OPCODE(i)) {
+#define INIT_DISPATCH for (;;) { idle_loop(): i = *pc; CODE_FETCH_HOOK(mrb, irep, pc, regs); switch (GET_OPCODE(i)) {
 #define CASE(op) case op:
 #define NEXT pc++; break
 #define JUMP break
@@ -1158,7 +1159,11 @@ RETRY_TRY_BLOCK:
           ci->argc = n;
           ci->nregs = n + 2;
         }
+#ifdef ALVSTAKAHASHI
+		result = body_func(mrb,m,recv);
+#else
         result = m->body.func(mrb, recv);
+#endif
         mrb->c->stack[0] = result;
         mrb_gc_arena_restore(mrb, ai);
         if (mrb->exc) goto L_RAISE;
@@ -1171,7 +1176,6 @@ RETRY_TRY_BLOCK:
             pool = irep->pool;
             syms = irep->syms;
           }
-			
         }
         regs = mrb->c->stack = ci->stackent;
         pc = ci->pc;
@@ -1225,7 +1229,11 @@ RETRY_TRY_BLOCK:
 
       /* prepare stack */
       if (MRB_PROC_CFUNC_P(m)) {
+#ifdef ALVSTAKAHASHI
+		recv = body_func(mrb,m,recv);
+#else
         recv = m->body.func(mrb, recv);
+#endif
         mrb_gc_arena_restore(mrb, ai);
         if (mrb->exc) goto L_RAISE;
         /* pop stackpos */
@@ -1308,7 +1316,11 @@ RETRY_TRY_BLOCK:
 
       if (MRB_PROC_CFUNC_P(m)) {
         ci->nregs = 0;
+#ifdef ALVSTAKAHASHI
+		mrb->c->stack[0] = body_func(mrb,m,recv);
+#else
         mrb->c->stack[0] = m->body.func(mrb, recv);
+#endif
         mrb_gc_arena_restore(mrb, ai);
         if (mrb->exc) goto L_RAISE;
         /* pop stackpos */
@@ -1682,7 +1694,11 @@ RETRY_TRY_BLOCK:
       value_move(mrb->c->stack, &regs[a], ci->argc+1);
 
       if (MRB_PROC_CFUNC_P(m)) {
+#ifdef ALVSTAKAHASHI
+		mrb->c->stack[0] = body_func(mrb,m,recv);
+#else
         mrb->c->stack[0] = m->body.func(mrb, recv);
+#endif
         mrb_gc_arena_restore(mrb, ai);
         goto L_RETURN;
       }
@@ -2314,7 +2330,11 @@ RETRY_TRY_BLOCK:
 
       if (MRB_PROC_CFUNC_P(p)) {
         ci->nregs = 0;
+#ifdef ALVSTAKAHASHI
+		mrb->c->stack[0] = body_func(mrb,p,recv);
+#else
         mrb->c->stack[0] = p->body.func(mrb, recv);
+#endif
         mrb_gc_arena_restore(mrb, ai);
         if (mrb->exc) goto L_RAISE;
         /* pop stackpos */
@@ -2457,3 +2477,4 @@ mrb_toplevel_run(mrb_state *mrb, struct RProc *proc)
 {
   return mrb_toplevel_run_keep(mrb, proc, 0);
 }
+#endif

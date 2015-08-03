@@ -152,6 +152,9 @@ extern ER		get_tim(SYSTIM *p_systim);
 
 extern ER 		dly_tsk(RELTIM dlytim);
 
+
+extern ER 		wai_tsk(void);
+
 #endif /* TOPPERS_MACRO_ONLY */
 
 /*
@@ -223,5 +226,7 @@ extern ER 		dly_tsk(RELTIM dlytim);
 #define COUNT_STK_T(sz)		TOPPERS_COUNT_SZ(sz, sizeof(STK_T))
 #define ROUND_STK_T(sz)		TOPPERS_ROUND_SZ(sz, sizeof(STK_T))
 
+
+#define mrb_ci_cp(x,y)	x=y
 
 #endif /* TOPPERS_KERNEL_H */

@@ -226,5 +226,6 @@ extern ER 		wai_tsk(void);
 #define COUNT_STK_T(sz)		TOPPERS_COUNT_SZ(sz, sizeof(STK_T))
 #define ROUND_STK_T(sz)		TOPPERS_ROUND_SZ(sz, sizeof(STK_T))
 
+extern void mrb_ci_cp(struct mrb_context *to,struct mrb_context *from);
 
 #endif /* TOPPERS_KERNEL_H */

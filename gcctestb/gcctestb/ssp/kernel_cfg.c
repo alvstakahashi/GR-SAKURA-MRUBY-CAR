@@ -115,6 +115,13 @@ unsigned char task_wait[TNUM_TSKID];
 
 RELTIM	tskTout[TNUM_TSKID];
 
+/*-----------------------------------------------
+ *  ruby コンテキスト保存情報
+ */
+struct mrb_context *ruby_ctx_current[TNUM_TSKID];
+
+struct mrb_context *ruby_ctx_top[TNUM_TSKID];
+
 /*
  *  Module Initialization Function
  */

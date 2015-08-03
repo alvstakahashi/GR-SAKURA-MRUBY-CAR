@@ -12,6 +12,17 @@
 #include "mruby/debug.h"
 #include "mruby/string.h"
 
+#ifdef ALVSTAKAHASHI
+#include "kernel_impl.h"
+#include "task.h"
+
+#include "kernel_cfg.h"
+extern struct mrb_context *ruby_ctx_top[];
+extern struct mrb_context *ruby_ctx_current[];
+
+#endif
+
+
 void mrb_init_heap(mrb_state*);
 void mrb_init_core(mrb_state*);
 void mrb_init_mrbgems(mrb_state*);
@@ -21,6 +32,29 @@ inspect_main(mrb_state *mrb, mrb_value mod)
 {
   return mrb_str_new_lit(mrb, "main");
 }
+#ifdef ALVSTAKAHASHI
+
+#define STACK_INIT_SIZE 128
+#define CALLINFO_INIT_SIZE 32
+
+struct mrb_context *mrb_alloc_context_multi(mrb_state *mrb)
+{
+  int i;
+  struct mrb_context *c;
+  static const struct mrb_context mrb_context_zero = { 0 };
+
+  for(i=0;i<TNUM_TSKID;i++)
+  {
+	ruby_ctx_top[i] = (struct mrb_context*)mrb_malloc(mrb, sizeof(struct mrb_context));
+    c = ruby_ctx_top[i];
+    *c = mrb_context_zero;
+  }
+  i = get_ipri_self(TSK_SELF);
+  return ruby_ctx_top[i];
+}
+
+#endif
+	
 
 MRB_API mrb_state*
 mrb_open_core(mrb_allocf f, void *ud)
@@ -44,7 +78,11 @@ mrb_open_core(mrb_allocf f, void *ud)
 #endif
 
   mrb_init_heap(mrb);
+#if 0
+  mrb->c = mrb_alloc_context_multi(mrb);
+#else
   mrb->c = (struct mrb_context*)mrb_malloc(mrb, sizeof(struct mrb_context));
+#endif
   *mrb->c = mrb_context_zero;
   mrb->root_c = mrb->c;
 

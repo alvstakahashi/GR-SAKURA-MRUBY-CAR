@@ -3,7 +3,7 @@
 **
 ** See Copyright Notice in mruby.h
 */
-
+#if 1
 #include <stddef.h>
 #include <stdarg.h>
 #include <math.h>
@@ -21,16 +21,6 @@
 #include "mruby/opcode.h"
 #include "value_array.h"
 #include "mrb_throw.h"
-
-#ifdef ALVSTAKAHASHI
-#include "kernel_impl.h"
-#include "task.h"
-
-#include "kernel_cfg.h"
-extern struct mrb_context *ruby_ctx_top[];
-extern struct mrb_context *ruby_ctx_current[];
-
-#endif
 
 #ifndef ENABLE_STDIO
 #if defined(__cplusplus)
@@ -88,50 +78,21 @@ stack_copy(mrb_value *dst, const mrb_value *src, size_t size)
     *dst++ = *src++;
   }
 }
-#if 0
-void mrb_ci_cp(struct mrb_context *to,struct mrb_context *from)
+
+#define ALVSTAKAHASHI
+
+#ifdef ALVSTAKAHASHI
+
+static mrb_value 
+body_func(mrb_state *mrb,struct RProc *m,mrb_value recv)
 {
-	to->stbase = from->stbase;
-	to->stend  = from->stend;
-	to->stack  = from->stack;
-	
-	to->cibase = from->cibase;
-	to->ciend  = from->ciend;
-	to->ci     = from->ci;
+	mrb_callinfo *ci = mrb->c->ci;
+	mrb_value result = m->body.func(mrb, recv);
+	mrb->c->ci = ci;
+	return(result);
 }
-	
-static void
-stack_init(mrb_state *mrb)
-{
-//  struct mrb_context *c;
-  struct mrb_context *tc;
-  int i;
-  static const struct mrb_context mrb_context_zero = { 0 };
+#endif
 
-  for(i=0;i<TNUM_TSKID;i++)
-  {
-  	tc = ruby_ctx_top[i];
-  	/* mrb_assert(mrb->stack == NULL); */
-  	tc->stbase = (mrb_value *)mrb_calloc(mrb, STACK_INIT_SIZE, sizeof(mrb_value));
-  	tc->stend = tc->stbase + STACK_INIT_SIZE;
-  	tc->stack = tc->stbase;
-
-  	/* mrb_assert(ci == NULL); */
-  	tc->cibase = (mrb_callinfo *)mrb_calloc(mrb, CALLINFO_INIT_SIZE, sizeof(mrb_callinfo));
-  	tc->ciend = tc->cibase + CALLINFO_INIT_SIZE;
-  	tc->ci = tc->cibase;
-  	tc->ci->target_class = mrb->object_class;
-  	tc->ci->stackent = tc->stack;
-
-  }
-  i = get_ipri_self(TSK_SELF);
-  mrb_ci_cp(mrb->c,ruby_ctx_top[i]);
-}
-
-#else
-void mrb_ci_cp(struct mrb_context *to,struct mrb_context *from)
-{
-}
 static void
 stack_init(mrb_state *mrb)
 {
@@ -148,10 +109,7 @@ stack_init(mrb_state *mrb)
   c->ci = c->cibase;
   c->ci->target_class = mrb->object_class;
   c->ci->stackent = c->stack;
-
 }
-#endif
-
 
 static inline void
 envadjust(mrb_state *mrb, mrb_value *oldbase, mrb_value *newbase)
@@ -745,8 +703,9 @@ argnum_error(mrb_state *mrb, mrb_int num)
 #endif
 
 #ifndef DIRECT_THREADED
+void idle_loop(void);
 
-#define INIT_DISPATCH for (;;) {  i = *pc; CODE_FETCH_HOOK(mrb, irep, pc, regs); switch (GET_OPCODE(i)) {
+#define INIT_DISPATCH for (;;) { idle_loop(): i = *pc; CODE_FETCH_HOOK(mrb, irep, pc, regs); switch (GET_OPCODE(i)) {
 #define CASE(op) case op:
 #define NEXT pc++; break
 #define JUMP break
@@ -1158,7 +1117,11 @@ RETRY_TRY_BLOCK:
           ci->argc = n;
           ci->nregs = n + 2;
         }
+#ifdef ALVSTAKAHASHI
+		result = body_func(mrb,m,recv);
+#else
         result = m->body.func(mrb, recv);
+#endif
         mrb->c->stack[0] = result;
         mrb_gc_arena_restore(mrb, ai);
         if (mrb->exc) goto L_RAISE;
@@ -1171,7 +1134,6 @@ RETRY_TRY_BLOCK:
             pool = irep->pool;
             syms = irep->syms;
           }
-			
         }
         regs = mrb->c->stack = ci->stackent;
         pc = ci->pc;
@@ -1225,7 +1187,11 @@ RETRY_TRY_BLOCK:
 
       /* prepare stack */
       if (MRB_PROC_CFUNC_P(m)) {
+#ifdef ALVSTAKAHASHI
+		recv = body_func(mrb,m,recv);
+#else
         recv = m->body.func(mrb, recv);
+#endif
         mrb_gc_arena_restore(mrb, ai);
         if (mrb->exc) goto L_RAISE;
         /* pop stackpos */
@@ -1308,7 +1274,11 @@ RETRY_TRY_BLOCK:
 
       if (MRB_PROC_CFUNC_P(m)) {
         ci->nregs = 0;
+#ifdef ALVSTAKAHASHI
+		mrb->c->stack[0] = body_func(mrb,m,recv);
+#else
         mrb->c->stack[0] = m->body.func(mrb, recv);
+#endif
         mrb_gc_arena_restore(mrb, ai);
         if (mrb->exc) goto L_RAISE;
         /* pop stackpos */
@@ -1682,7 +1652,11 @@ RETRY_TRY_BLOCK:
       value_move(mrb->c->stack, &regs[a], ci->argc+1);
 
       if (MRB_PROC_CFUNC_P(m)) {
+#ifdef ALVSTAKAHASHI
+		mrb->c->stack[0] = body_func(mrb,m,recv);
+#else
         mrb->c->stack[0] = m->body.func(mrb, recv);
+#endif
         mrb_gc_arena_restore(mrb, ai);
         goto L_RETURN;
       }
@@ -2457,3 +2431,4 @@ mrb_toplevel_run(mrb_state *mrb, struct RProc *proc)
 {
   return mrb_toplevel_run_keep(mrb, proc, 0);
 }
+#endif

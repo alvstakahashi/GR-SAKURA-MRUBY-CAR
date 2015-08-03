@@ -42,12 +42,20 @@
 #include <limits.h>
 #include <stdio.h>
 
+#include "mruby.h"
+#include "mruby/variable.h"
+#include "mruby/string.h"
+
+
 #include "kernel_impl.h"
 #include "task.h"
 
 #include "kernel_cfg.h"
 
+extern struct mrb_context *ruby_ctx_top[];
+extern struct mrb_context *ruby_ctx_current[];
 
+extern mrb_state *mrb_global;
 
 /*
  *  トレースログマクロのデフォルト定義
@@ -297,6 +305,8 @@ initialize_task(void)
 		}
 		task_wait[ipri] = 0;
 		tskTout[ipri] = 0;
+		ruby_ctx_top[ipri] = 0;
+		ruby_ctx_current[ipri] = 0;
 	}
 	/* 割込み禁止フラグの初期化 */
 	disdsp = false;
@@ -417,11 +427,14 @@ void dispatch(intptr_t ipri)
 void
 dispatcher(void)
 {
+	intptr_t newtskipi;
 	do {
 		if(!primap_empty()) {
 			/* タスクの開始 */
+			newtskipi = search_schedtsk();			//次にディスパッチされるタスクID
+			mrb_ci_cp(mrb_global->c,ruby_ctx_current[newtskipi]);
 			//run_task(search_schedtsk());
-			dispatch(search_schedtsk());		//これからは帰ってこない
+			dispatch(newtskipi);		//これからは帰ってこない
 		}
 		else {
 			last_ipri = 0xff;
@@ -563,11 +576,15 @@ dly_tsk(RELTIM dlytim)
 	if (setjmp(task_ctx[tskpri]) == 0)
 	{
 		/*登録した場合*/
+	  	mrb_ci_cp(ruby_ctx_current[tskpri],mrb_global->c);
+
 		longjmp(disp_ctx,1);			//sta_kerの続きに行く
 	}
 	else
 	{
 		// タスク復帰した場合
+		tskpri = get_ipri_self(TSK_SELF);
+	  	mrb_ci_cp(mrb_global->c,ruby_ctx_current[tskpri]);
 		ipl_maskClear();
 		t_unlock_cpu();
 #if 0
@@ -603,9 +620,13 @@ void handler(INTHDR userhandler)
 				// RUN中に高優先度のタスクに切り替わる場合
 				if (setjmp(task_ctx[last_ipri]) == 0)
 				{
+					//rubyのコンテキストを保存
+				  	mrb_ci_cp(ruby_ctx_current[last_ipri],mrb_global->c);
+
 					// 高優先度のタスクにディスパッチ
 					dispatch(newtskipi);	//これはリターンしない
 				}
+				
 			}
 		}
 	}

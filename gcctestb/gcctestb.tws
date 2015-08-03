@@ -11,21 +11,19 @@
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gcctestb.c" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\interrupt_handlers.c" 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\lowlbl.s" 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rx63nsci0.c" 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\kernel_cfg.c" 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rbcall.c" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\task.c" 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\task_manage.c" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\time_event.c" 
 [WORKSPACE_FILE_STATES]
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\arch\RX62N\target_kernel.h" -8 -31 887 225 1 2 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 104 104 837 282 0 0 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gcctestb.c" 104 104 815 260 0 8 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\interrupt_handlers.c" 26 26 815 260 0 5 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\lowlbl.s" 52 52 815 260 0 6 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rx63nsci0.c" 78 78 815 260 0 7 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\kernel_cfg.c" 0 0 815 260 0 4 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\task.c" 0 0 961 429 0 1 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\time_event.c" 130 130 815 260 0 3 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\arch\RX62N\target_kernel.h" -8 -31 961 378 1 4 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 78 78 841 235 0 2 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\gcctestb.c" 78 78 841 235 0 7 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\interrupt_handlers.c" 52 52 841 235 0 6 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rbcall.c" 26 26 837 231 0 0 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\task.c" 26 26 841 235 0 5 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\task_manage.c" 52 52 841 235 0 1 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\time_event.c" 104 104 841 235 0 3 
 [LOADED_PROJECTS]
 "gcctestb" 
 [END]

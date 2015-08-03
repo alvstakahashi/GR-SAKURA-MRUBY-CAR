@@ -5,8 +5,8 @@ MRuby::Toolchain.new(:grsakura) do |conf|
 
   conf.cc do |cc|
     cc.command="rx-elf-gcc"
-    cc.flags << "-O2 -mcpu=rx600 -mlittle-endian-data -mas100-syntax -mint-register=0"
-
+    cc.flags << "-O2 -mcpu=rx600 -mlittle-endian-data -mas100-syntax -mint-register=0 "
+    cc.flags << " -DALVSTAKAHASHI"
     cc.include_paths = ["#{MRUBY_ROOT}/include"],
     cc.include_paths << "#{SSP_ROOT}/include"
     cc.include_paths << "#{SSP_ROOT}/ssp"
