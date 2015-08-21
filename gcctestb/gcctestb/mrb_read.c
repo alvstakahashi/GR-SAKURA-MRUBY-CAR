@@ -75,7 +75,7 @@ uint8_t *mrb_read_ui(void)
 
 	int loadCount = 0;
 
-	printf("\nmrubyOS ver0.001 By AliveVisionSoftwareKK\n");
+	printf("\nmrubyOS ver0.002 By AliveVisionSoftwareKK\n");
 	while(1)
 	{
 		printf("for Command L to load mrb binary\n");

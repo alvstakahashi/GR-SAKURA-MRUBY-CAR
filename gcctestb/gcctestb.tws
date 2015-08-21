@@ -10,6 +10,7 @@
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\arch\RX62N\target_kernel.h" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\interrupt_handlers.c" 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\mrb_read.c" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rbcall.c" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rx63nsci0.c" 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\kernel_cfg.c" 
@@ -20,11 +21,12 @@
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\arch\RX62N\target_kernel.h" 0 0 961 409 0 2 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\crt0.s" 0 0 1158 428 0 0 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\interrupt_handlers.c" 52 52 841 266 0 7 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\mrb_read.c" -8 -31 1092 396 1 9 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rbcall.c" 130 130 789 325 0 5 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\rx63nsci0.c" 0 0 1158 428 0 1 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\kernel_cfg.c" 104 104 789 325 0 4 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\task.c" 78 78 789 325 0 3 
-"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\time_event.c" -8 -31 1244 396 1 8 
+"D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\time_event.c" 0 0 1244 396 0 8 
 "D:\usr\github\clone\GR-SAKURA-MRUBY-CAR\gcctestb\gcctestb\ssp\time_manage.c" 26 26 841 266 0 6 
 [LOADED_PROJECTS]
 "gcctestb" 
