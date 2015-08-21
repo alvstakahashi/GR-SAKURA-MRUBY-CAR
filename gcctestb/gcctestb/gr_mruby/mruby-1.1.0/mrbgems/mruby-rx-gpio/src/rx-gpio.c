@@ -90,6 +90,11 @@ static void *get_port(int pin,int *bit,int *ddr)
 			*bit = 7;
 			ret = (void*)&PORTE;
 			break;
+		case 249:
+			*bit = 6;
+			ret = (void*)&PORTC;
+			break;
+		
 		case 250:
 		case 350:
 			*bit = 7;
@@ -230,6 +235,7 @@ mrb_mruby_rx_gpio_gem_init(mrb_state* mrb) {
 	mrb_define_const(mrb,gpio, "IO50", mrb_fixnum_value(216));
 	mrb_define_const(mrb,gpio, "IO51", mrb_fixnum_value(217));
 
+	mrb_define_const(mrb,gpio, "IO11", mrb_fixnum_value(249));
 	mrb_define_const(mrb,gpio, "IO12", mrb_fixnum_value(250));
 
 
