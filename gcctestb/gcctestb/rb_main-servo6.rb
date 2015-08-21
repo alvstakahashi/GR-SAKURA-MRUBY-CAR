@@ -16,6 +16,7 @@ class Gpiocyclic < Ssp_cyclic
 		@alarm = alarm
 		@gpio  = gpio
 		@led  = led
+		@tout = 140
 	end
 	def start(tout)
 		@tout = tout
@@ -46,7 +47,7 @@ class MainThread < Ssp_thread
 		puts "start mainThread"
 
   		led1    = Rx_gpio.new(Rx_gpio::LED1)		#accell
-  		accel    = Rx_gpio.new(Rx_gpio::IO2)
+  		accel    = Rx_gpio.new(Rx_gpio::IO11)
 
   		led1.off
 

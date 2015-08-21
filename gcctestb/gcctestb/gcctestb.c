@@ -53,12 +53,13 @@ int main(void)
 
 	printf("hello\n");
 
-	PORT2.PDR.BIT.B5 = 0;		//IN
+//	PORT2.PDR.BIT.B5 = 0;		//IN
+	PORTC.PDR.BIT.B4 = 0;		//IN
 //	PORT2.PCR.BIT.B5 = 1;		//PULLUP
 
 	uint8_t *prg_data = (uint8_t *)rb_main;
 	
-	if (PORT2.PIDR.BIT.B5 != 0)		//IO5をGND結線でスキップ
+	if (PORTC.PIDR.BIT.B4 != 0)		//IO10をGND結線でスキップ
 	{
 		prg_data = mrb_read_ui();
 		if (prg_data == NULL)
